@@ -4,3 +4,70 @@
 *:after {
   box-sizing: border-box;
 }
+
+nav ul {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background-color: black;
+  list-style: none;
+  color: white;
+}
+
+.top-header {
+  display: grid;
+  grid-template-columns: 2fr auto;
+}
+
+.delorean-specs {
+  list-style: none;
+}
+
+.overlap {
+  width: 12.5em;
+  background-color: azure;
+}
+
+.own {
+  margin-top: 1em;;
+  width: 9em;
+  height: 2.5em;
+}
+
+h2 {
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
+}
+
+.headings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.upgrades-and-reviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.upgrades {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  list-style: none;
+  padding-left: 0;
+}
+
+.reviews {
+  padding-left: 1em;
+}
+
+.upgrade-item {
+  background-color: crimson;
+  align-self: center;
+}
+
+.image {
+  alignment-baseline: middle;
+}
