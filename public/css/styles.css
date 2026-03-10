@@ -18,32 +18,32 @@ nav ul {
   grid-template-columns: 2fr auto;
 }
 
-.delorean-specs {
-  list-style: none;
+.overlap {
+  position: relative;
+  width: 9em;
+  background-color: rgba(240, 255, 255, 0.799);
+  z-index: 2;
+  margin-top: -11em;
+  
 }
 
-.overlap {
-  width: 12.5em;
-  background-color: azure;
+.hero-image{
+  z-index: 1;
+  width: 75%;
+  height: 75%;
 }
 
 .own {
   margin-top: 1em;;
   width: 9em;
   height: 2.5em;
+  opacity: 1;
 }
 
-h2 {
-  margin: 0;
-}
-
-h4 {
-  margin: 0;
-}
-
-.headings {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.delorean-specs {
+  list-style: none;
+  font-size: small;
+  padding-left: 0.5em;
 }
 
 .upgrades-and-reviews {
@@ -51,10 +51,23 @@ h4 {
   grid-template-columns: 1fr 1fr;
 }
 
-.upgrades {
+.headings {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  font-size: small;
+}
+
+.upgrade-picture {
+  padding-right: 2.5em;
+  padding-left: 2.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  background-color: crimson;
+  border: 2px solid black;
+} 
+
+.upgrades {
+
   list-style: none;
   padding-left: 0;
 }
@@ -63,11 +76,116 @@ h4 {
   padding-left: 1em;
 }
 
-.upgrade-item {
-  background-color: crimson;
-  align-self: center;
+h1 {
+  margin-bottom: 1.5em;
 }
 
-.image {
-  alignment-baseline: middle;
+
+@media screen and (min-width: 500px) {
+  nav ul {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: black;
+    list-style: none;
+    color: white;
+  }
+
+  .top-header {
+    display: grid;
+    grid-template-columns: 2fr auto;
+  }
+
+  .content {
+    margin: 5%;
+    background-image: image-set('/images/site/checkerboard.jpg');
+  }
+
+  .wrapper {
+    background-color: white;
+    padding: 0.5em;
+    border: solid crimson 2px;
+    border-radius: 20px;
+  }
+
+  .panel {
+    background-color: white;
+  }
+  .delorean-specs {
+    list-style: none;
+    font-size: large;
+    padding-left: 0.5em;
+  }
+
+  .hero-image{
+    z-index: 1;
+    width: 27em;
+    height: 15em;
+  }
+  .overlap {
+    position: relative;
+    width: 12.5em;
+    background-color: rgba(240, 255, 255, 0.799);
+    z-index: 2;
+    margin-top: -12em;
+  }
+
+  .own {
+    margin-top: 1em;;
+    width: 9em;
+    height: 2.5em;
+    opacity: 1;
+  }
+
+  h1 {
+    margin-bottom: 0.5em;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  .headings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: large;
+  }
+
+  .item-text {
+    padding-left: 1em;
+  }
+
+  .upgrades-and-reviews {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .upgrades {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .reviews {
+    padding-left: 1em;
+  }
+
+  .upgrade-item {
+    
+    align-self: center;
+  }
+
+  .upgrade-picture {
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: crimson;
+    border: 2px solid black;
+  }
 }
