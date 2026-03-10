@@ -97,7 +97,7 @@ h1 {
 
   .content {
     margin: 5%;
-    background-image: image-set('/images/site/checkerboard.jpg');
+    background-image: url('/images/site/checkerboard.jpg');
   }
 
   .wrapper {
