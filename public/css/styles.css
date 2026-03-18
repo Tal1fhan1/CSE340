@@ -84,9 +84,14 @@ h1 {
 @media screen and (min-width: 500px) {
   nav ul {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     background-color: black;
     list-style: none;
+    color: white;
+  }
+
+  nav ul li a{
+    text-decoration: none;
     color: white;
   }
 
