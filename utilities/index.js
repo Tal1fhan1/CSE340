@@ -30,16 +30,13 @@ Util.getNav = async function (req, res, next) {
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
-    grid = '<ul id="inv-display">'
+    grid = '<ul class="inv-display">'
     data.forEach(vehicle => { 
       grid += '<li>'
-      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
+      grid += '<img src="' + vehicle.inv_thumbnail 
+      +'" alt="' + vehicle.inv_make + ' ' + vehicle.inv_model 
+      +' on CSE Motors" />'
       grid += '<div class="namePrice">'
-      grid += '<hr />'
       grid += '<h2>'
       grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
@@ -56,6 +53,51 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+
+/* **************************************
+* Build the vehicle details view HTML
+* ************************************ */
+Util.buildVehicleDetailsGrid = async function(info){
+  let grid
+  if(info.length > 0){
+    info.forEach(vehicle => { 
+      grid = '<div class="vehicleDetails">'
+      grid += '<img src="' + vehicle.inv_image 
+      +'" alt="'+ vehicle.inv_make + ' ' + vehicle.inv_model 
+      +' on CSE Motors" />'
+      grid += '<ul class="vehicle-details-display">'
+      grid += '<li><h2>'
+      grid += vehicle.inv_make + ' ' + vehicle.inv_model + ' Details'
+      grid += '</h2></li>'
+
+      grid += '<li><h3>' 
+      grid += 'Price: $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price)
+      grid += '</h3></li>'
+
+      grid += '<li><h3>' 
+      grid += 'Description: '
+      grid += '<span>' + vehicle.inv_description + '</span>'
+      grid += '</h3></li>'
+
+      grid += '<li><h3>' 
+      grid += 'Color: '
+      grid += '<span>' + vehicle.inv_color + '</span>'
+      grid += '</h3></li>'
+
+      grid += '<li><h3>' 
+      grid += 'Miles: '
+      grid += '<span>' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</span>'
+      grid += '</h3></li>'
+
+      grid += '</div>'
+
+    })
+  } else { 
+    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  return grid
+}
+
 
 /* ****************************************
  * Middleware For Handling Errors

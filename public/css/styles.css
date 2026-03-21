@@ -100,6 +100,40 @@ h1 {
     grid-template-columns: 2fr auto;
   }
 
+  .vehicleDetails {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  span {
+    font-weight: normal;
+  }
+
+  .vehicle-details-display {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .inv-display {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: auto;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .inv-display li {
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: white;
+    border: solid crimson 2px;
+    border-radius: 20px;
+    margin: 0.5em;
+    align-items: center;
+  }
+  
   .content {
     margin: 5%;
     background-image: url('/images/site/checkerboard.jpg');
