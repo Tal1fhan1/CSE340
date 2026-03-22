@@ -36,4 +36,17 @@ invCont.buildByVehicleDetails = async function (req, res, next) {
     grid,
   })
 }
+
+invCont.buildError = async function (req, res, next) {
+  const error_id = req.params.errorID
+  const data = await invModel.getError(error_id)
+  const grid = await utilities.buildErrorGrid(data)
+  let nav = await utilities.getNav()
+  res.render("./inventory/details", {
+    title: "Error",
+    nav,
+    grid,
+  })
+}
+
 module.exports = invCont

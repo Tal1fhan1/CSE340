@@ -35,8 +35,7 @@ Util.buildClassificationGrid = async function(data){
       grid += '<li>'
       grid += '<img src="' + vehicle.inv_thumbnail 
       +'" alt="' + vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" />'
-      grid += '<div class="namePrice">'
+      +' on CSE Motors">'
       grid += '<h2>'
       grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
@@ -44,7 +43,6 @@ Util.buildClassificationGrid = async function(data){
       grid += '</h2>'
       grid += '<span>$' 
       + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
-      grid += '</div>'
       grid += '</li>'
     })
     grid += '</ul>'
@@ -64,7 +62,7 @@ Util.buildVehicleDetailsGrid = async function(info){
       grid = '<div class="vehicleDetails">'
       grid += '<img src="' + vehicle.inv_image 
       +'" alt="'+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" />'
+      +' on CSE Motors">'
       grid += '<ul class="vehicle-details-display">'
       grid += '<li><h2>'
       grid += vehicle.inv_make + ' ' + vehicle.inv_model + ' Details'
@@ -88,6 +86,7 @@ Util.buildVehicleDetailsGrid = async function(info){
       grid += 'Miles: '
       grid += '<span>' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</span>'
       grid += '</h3></li>'
+      grid += '</ul>'
 
       grid += '</div>'
 
@@ -98,6 +97,47 @@ Util.buildVehicleDetailsGrid = async function(info){
   return grid
 }
 
+Util.buildErrorGrid = async function(stuff){
+  let grid
+  if(stuff.length > 0){
+    stuff.forEach(vehicle => { 
+      grid = '<div class="vehicleDetails">'
+      grid += '<img src="' + vehicle.inv_image 
+      +'" alt="'+ vehicle.inv_make + ' ' + vehicle.inv_model 
+      +' on CSE Motors">'
+      grid += '<ul class="vehicle-details-display">'
+      grid += '<li><h2>'
+      grid += vehicle.inv_make + ' ' + vehicle.inv_model + ' Details'
+      grid += '</h2></li>'
+
+      grid += '<li><h3>' 
+      grid += 'Price: $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price)
+      grid += '</h3></li>'
+
+      grid += '<li><h3>' 
+      grid += 'Description: '
+      grid += '<span>' + vehicle.inv_description + '</span>'
+      grid += '</h3></li>'
+
+      grid += '<li><h3>' 
+      grid += 'Color: '
+      grid += '<span>' + vehicle.inv_color + '</span>'
+      grid += '</h3></li>'
+
+      grid += '<li><h3>' 
+      grid += 'Miles: '
+      grid += '<span>' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</span>'
+      grid += '</h3></li>'
+      grid += '</ul>'
+
+      grid += '</div>'
+
+    })
+  } else { 
+    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  return grid
+}
 
 /* ****************************************
  * Middleware For Handling Errors
