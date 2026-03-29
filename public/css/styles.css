@@ -209,6 +209,28 @@ h1 {
     opacity: 1;
   }
 
+  .login-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid crimson 2px;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding-top: 1em;
+  }
+
+  .register-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid crimson 2px;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+
+
   h1 {
     margin-bottom: 0.5em;
   }
@@ -360,6 +382,23 @@ h1 {
     width: 9em;
     height: 2.5em;
     opacity: 1;
+  }
+
+  .login-panel {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    border: solid crimson 2px;
+  }
+
+  .register-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid crimson 2px;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding-top: 1em;
+    padding-bottom: 1em;
   }
 
   h1 {
