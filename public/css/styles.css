@@ -209,17 +209,7 @@ h1 {
     opacity: 1;
   }
 
-  .login-panel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: solid crimson 2px;
-    margin-left: 25%;
-    margin-right: 25%;
-    padding-top: 1em;
-  }
-
-  .register-panel {
+  .login-panel, .register-panel, .new-classification-panel, .new-vehicle-panel {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -229,7 +219,6 @@ h1 {
     padding-top: 1em;
     padding-bottom: 1em;
   }
-
 
   h1 {
     margin-bottom: 0.5em;
@@ -390,7 +379,7 @@ h1 {
     border: solid crimson 2px;
   }
 
-  .register-panel {
+  .register-panel, .new-classification-panel, .new-vehicle-panel {
     display: flex;
     justify-content: center;
     align-items: center;

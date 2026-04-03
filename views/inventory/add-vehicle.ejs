@@ -1,0 +1,56 @@
+<h1><%= title %></h1>
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<div class="new-vehicle-panel">
+    <form method="POST" action="/inv/add-vehicle">
+        <label for="classificationList">Classification Name:</label>
+        <br>
+        <%- classificationList %>
+        <br>
+        <label for = "inv_make">Make</label>
+        <br>
+        <input type="text" id="inv_make" name="inv_make" required value="<%= locals.inv_make %>">
+        <br>
+        <label for = "inv_model">Model</label>
+        <br>
+        <input type="text" id="inv_model" name="inv_model" required value="<%= locals.inv_model %>">
+        <br>
+        <label for = "inv_description">Description</label>
+        <br>
+        <textarea id="inv_description" name="inv_description" required ><%= locals.inv_description %></textarea>
+        <br>
+        <label for = "inv_image">Image Path</label>
+        <br>
+        <input type="text" id="inv_image" name="inv_image" required value="<%= locals.inv_image %>">
+        <br>
+        <label for = "inv_thumbnail">Thumbnail Path</label>
+        <br>
+        <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="<%= locals.inv_thumbnail %>">
+        <br>
+        <label for = "inv_price">Price</label>
+        <br>
+        <input type="number" id="inv_price" name="inv_price" required value="<%= locals.inv_price %>">
+        <br>
+        <label for = "inv_year">Year</label>
+        <br>
+        <input type="number" id="inv_year" name="inv_year" required value="<%= locals.inv_year %>">
+        <br>
+        <label for = "inv_miles">Miles</label>
+        <br>
+        <input type="number" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles %>">
+        <br>
+        <label for = "inv_color">Color</label>
+        <br>
+        <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color %>">
+        <br>
+        <button type="submit">Add Vehicle</button>
+    </form>  
+</div>
