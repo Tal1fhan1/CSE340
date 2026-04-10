@@ -209,7 +209,7 @@ h1 {
     opacity: 1;
   }
 
-  .login-panel, .register-panel, .new-classification-panel, .new-vehicle-panel {
+  .login-panel, .register-panel, .new-classification-panel, .new-vehicle-panel, .delete-vehicle-panel {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -218,6 +218,8 @@ h1 {
     margin-right: 25%;
     padding-top: 1em;
     padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
   }
 
   h1 {

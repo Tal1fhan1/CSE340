@@ -1,5 +1,8 @@
+const e = require("connect-flash")
 const invModel = require("../models/inventory-model")
 const Util = {}
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -142,7 +145,7 @@ Util.buildErrorGrid = async function(stuff){
 Util.buildClassificationList = async function (classification_id = null) {
     let things = await invModel.getClassifications()
     let classificationList =
-      '<select name="classification_id" id="classificationList" required>'
+      '<select name="classification_id" id="classificationList" required value="<%= locals.inv_make %>">'
     classificationList += "<option value=''>Choose a Classification</option>"
     things.rows.forEach((row) => {
       classificationList += '<option value="' + row.classification_id + '"'
@@ -164,5 +167,87 @@ Util.buildClassificationList = async function (classification_id = null) {
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+ if (req.cookies.jwt) {
+  jwt.verify(
+   req.cookies.jwt,
+   process.env.ACCESS_TOKEN_SECRET,
+   function (err, accountData) {
+    if (err) {
+     req.flash("Please log in")
+     res.clearCookie("jwt")
+     return res.redirect("/account/login")
+    }
+    res.locals.accountData = accountData
+    res.locals.loggedin = 1
+    next()
+   })
+ } else {
+  next()
+ }
+}
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+ Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+    return logout
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
+/****************************************
+ *  Change header link if logged in
+ * ************************************ */
+Util.changeLink = (req, res) => {
+  let link
+  if(res.locals.loggedin) {
+    link = '<a href="/inv/">Welcome ' + res.locals.accountData.account_firstname + ' </a><a href="/account/logout" title="Click to log out">Logout</a>'
+  } else {
+    link = '<a href="/account/login" title="Click to log in">My Account</a>'
+  }
+  return link
+}
+
+Util.changeGreeting = (req, res) => {
+  let greeting
+  if(res.locals.accountData.account_type == 'Admin' || res.locals.accountData.account_type == 'Employee') {
+    greeting = '<h2>Welcome ' + res.locals.accountData.account_firstname + ' </h2>'
+    greeting += '<br>'
+    greeting += '<p>You\'re logged in</p>'
+    greeting += '<br>'
+    greeting += '<a href="/account/update/' + res.locals.accountData.account_email + '" title="Click to update your account information">Update Account Information</a>'
+    greeting += '<br>'
+    greeting += '<h3>Inventory Management</h3>'
+    greeting += '<br>'
+    greeting += '<p>To manage inventory classifications and vehicles, <a href="/inv/">Click here</a></p>'
+  }
+  else {
+    greeting = '<h2>Welcome ' + res.locals.accountData.account_firstname + ' </h2>'
+    greeting += '<br>'
+    greeting += '<p>You\'re logged in</p>'
+    greeting += '<br>'
+    greeting += '<a href="/account/update/' + res.locals.accountData.account_email + '" title="Click to update your account information">Update Account Information</a>'
+    greeting += '<br>'
+  }
+  return greeting
+}
+
+Util.checkPrivileges = (req, res, next) => {
+  if (res.locals.accountData.account_type == 'Admin' || res.locals.accountData.account_type == 'Employee') {
+    next()
+  } else {
+    req.flash("notice", "You do not have permission to access this page.")
+    return res.redirect("/account/login")
+  }
+}
 
 module.exports = Util
