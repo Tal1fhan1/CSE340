@@ -146,13 +146,7 @@ async function accountLogin(req, res) {
  *  Process logout request
  * ************************************ */
 async function accountLogout(req, res) {
-  const cookieOptions = { httpOnly: true }
-
-  if (process.env.NODE_ENV !== "development") {
-    cookieOptions.secure = true
-  }
-
-  res.clearCookie("jwt", cookieOptions)
+  res.clearCookie("jwt", { httpOnly: true })
   req.flash("notice", "You have been logged out.")
   return res.redirect("/")
 }

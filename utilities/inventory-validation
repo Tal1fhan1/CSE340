@@ -69,7 +69,7 @@ validate.vehicleRules = () => {
         .trim()
         .escape()
         .notEmpty()
-
+        .isURL()
         .withMessage("Please provide a valid image URL."),
       body("inv_thumbnail")
         .trim()
