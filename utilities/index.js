@@ -197,7 +197,6 @@ Util.checkJWTToken = (req, res, next) => {
  Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
     next()
-    return logout
   } else {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
@@ -224,7 +223,7 @@ Util.changeGreeting = (req, res) => {
     greeting += '<br>'
     greeting += '<p>You\'re logged in</p>'
     greeting += '<br>'
-    greeting += '<a href="/account/update/' + res.locals.accountData.account_email + '" title="Click to update your account information">Update Account Information</a>'
+    greeting += '<a href="/account/update/' + res.locals.accountData.account_id + '" title="Click to update your account information">Update Account Information</a>'
     greeting += '<br>'
     greeting += '<h3>Inventory Management</h3>'
     greeting += '<br>'

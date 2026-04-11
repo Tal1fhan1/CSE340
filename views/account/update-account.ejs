@@ -23,7 +23,7 @@
         <br>
         <input type="email" id="account_email" name="account_email" required value="<%= locals.account_email %>">
         <br>
-        <button type="submit" disabled>Update Account</button>
+        <button type="submit">Update Account</button>
         <input type="hidden" name="account_id"
         <% if(locals.account_id) { %> value="<%= locals.account_id %>"
         <% } %>>
@@ -39,7 +39,7 @@
         <br>
         <span>Entering a new password will permanently change your current password. Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
         <br>
-        <button type="submit" disabled>Update Password</button>
+        <button type="submit">Update Password</button>
         <input type="hidden" name="account_id"
         <% if(locals.account_id) { %> value="<%= locals.account_id %>"
         <% } %>>
