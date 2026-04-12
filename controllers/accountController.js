@@ -178,6 +178,7 @@ async function updateAccount (req, res, next) {
   
 
   if (updateResult) {
+    account_firstname
     req.flash(
       "notice",
       `Account updated successfully.`
@@ -187,6 +188,7 @@ async function updateAccount (req, res, next) {
       nav,
       link,
       greeting,
+      account_firstname,
       errors: null,
     })
   } else {
@@ -229,6 +231,7 @@ async function updatePassword(req, res) {
   )
 
   if (updateResult) {
+    res.locals.accountData.account_firstname = accountData.account_firstname    
     req.flash(
       "notice",
       `Congratulations, your password has been updated.`
