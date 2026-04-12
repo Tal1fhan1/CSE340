@@ -39,6 +39,17 @@ async function getAccountByEmail (account_email) {
   }
 }
 
+async function getAllAccounts() {
+  try {
+    const result = await pool.query(
+      'SELECT account_id, account_firstname, account_lastname, account_email, account_type FROM account'
+    )
+    return result.rows
+  } catch (error) {
+    return new Error("Error fetching all accounts")
+  }
+}
+
 async function getAccountById (account_id) {
   try {
     const result = await pool.query(
@@ -59,6 +70,18 @@ async function updateAccount(account_firstname, account_lastname, account_email,
   }
 }
 
+async function deleteAccount(account_id){
+  try {
+    const sql = "DELETE FROM account WHERE account_id=$1 RETURNING *"
+    const data = await pool.query(sql, [
+      account_id
+    ])
+  return data
+  } catch (error) {
+    new Error("Delete Account Error")
+  }
+}
+
 async function updatePassword( account_password, account_id) {
   try {
     const sql = "UPDATE account SET account_password = $1 WHERE account_id = $2 RETURNING *"
@@ -68,4 +91,4 @@ async function updatePassword( account_password, account_id) {
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword }
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword, getAllAccounts,  deleteAccount }

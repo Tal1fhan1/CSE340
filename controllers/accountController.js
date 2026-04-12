@@ -33,6 +33,72 @@ async function buildRegister(req, res, next) {
   })
 }
 
+async function buildAdmin(req, res, next) {
+  let nav = await utilities.getNav()
+  let link = utilities.changeLink(req, res)
+  let accountData = await accountModel.getAllAccounts()
+  let dataTable = await utilities.buildAccountGrid(accountData)
+  res.render("account/admin", {
+    title: "Admin",
+    nav,
+    link,
+    dataTable,
+    errors: null,
+  })
+}
+
+async function deleteAccountView(req, res, next) {
+  const account_id = req.params.accountId
+  let nav = await utilities.getNav()
+  let link = utilities.changeLink(req, res)
+  let accountData = await accountModel.getAccountById(account_id)
+  res.render("account/delete", {
+    title: "Delete Account",
+    nav,
+    link,
+    account_id: accountData.account_id,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+    errors: null,
+  })
+}
+
+async function deleteAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  let link = utilities.changeLink(req, res)
+  const { account_id } = req.body
+  
+
+
+  const deleteResult = await accountModel.deleteAccount(account_id)
+
+  if (deleteResult) {
+    let accountData = await accountModel.getAllAccounts()
+    let dataTable = await utilities.buildAccountGrid(accountData)
+    let newNav = await utilities.getNav()
+    req.flash(
+      "notice",
+      `Account deleted successfully.`
+    )
+    res.status(201).render("account/admin", {
+      title: "Admin",
+      nav: newNav,
+      link,
+      dataTable,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the account delete failed.")
+    res.status(501).render("account/delete", {
+      title: "Delete Account",
+      nav,
+      link,
+      errors: null,
+    })
+  }
+}
+
 async function accountManagement(req, res, next) {
   let nav = await utilities.getNav()
   let link = utilities.changeLink(req, res)
@@ -178,7 +244,8 @@ async function updateAccount (req, res, next) {
   
 
   if (updateResult) {
-    account_firstname
+    let newLink = utilities.changeLink(req, res)
+    let newGreeting = utilities.changeGreeting(req, res)
     req.flash(
       "notice",
       `Account updated successfully.`
@@ -186,9 +253,8 @@ async function updateAccount (req, res, next) {
     res.status(201).render("account/account-management", {
       title: "Account Management",
       nav,
-      link,
-      greeting,
-      account_firstname,
+      link: newLink,
+      greeting: newGreeting,
       errors: null,
     })
   } else {
@@ -263,4 +329,7 @@ module.exports = {
   updateAccountView,
   updateAccount,
   updatePassword,
+  buildAdmin,
+  deleteAccountView,
+  deleteAccount,
 }

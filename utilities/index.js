@@ -55,6 +55,47 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+Util.buildAccountGrid = async function(data){
+  let dataTable = '<table id="accountTable">'; 
+  if(data.length > 0){ 
+    dataTable += '<tr><th>Full Name</th>'
+    dataTable += '<th>Email</th>'
+    dataTable += '<th>Type</th>' 
+    dataTable += '</tr>';
+    // Set up the table body 
+    dataTable += '<tbody>'; 
+    // Iterate over all vehicles in the array and put each in a row 
+    data.forEach(element => { 
+      dataTable += `<tr><td>${element.account_firstname} ${element.account_lastname}</td>`;
+      dataTable += `<td>${element.account_email}</td>`; 
+      dataTable += `<td>${element.account_type}</td>`; 
+      dataTable += `<td><a href='/account/admin/delete/${element.account_id}' title='Click to delete'>Delete</a></td></tr>`; 
+    }) 
+    dataTable += '</tbody>'; 
+    dataTable += '</table>';
+  } else { 
+    dataTable += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  return dataTable
+}
+
+Util.buildAccountTypeGrid = async function(data){
+  let dataTable = '<div class="change-type-panel">'
+  dataTable += '<form id="updateForm" method="POST" action="/account/admin/change-type">'
+  dataTable += `<label for="account_type">Select an Account Type for ${data.account_firstname} ${data.account_lastname}:</label>`
+  dataTable += '<br>'
+  dataTable += '<select id="account_type" name="account_type" required>'
+  dataTable += '<option value="">Choose an Account Type</option>'
+  dataTable += '<option value="admin">Admin</option>'
+  dataTable += '<option value="client">Client</option>'
+  dataTable += '<option value="employee">Employee</option>'
+  dataTable += '</select>'
+  dataTable += '<button type="submit">Change Type</button>'
+  dataTable += '</form> '
+  dataTable += '</div>'
+  return dataTable
+}
+
 /* **************************************
 * Build the vehicle details view HTML
 * ************************************ */
@@ -218,7 +259,20 @@ Util.changeLink = (req, res) => {
 
 Util.changeGreeting = (req, res) => {
   let greeting
-  if(res.locals.accountData.account_type == 'Admin' || res.locals.accountData.account_type == 'Employee') {
+  if(res.locals.accountData.account_type == 'Admin') {
+    greeting = '<h2>Welcome ' + res.locals.accountData.account_firstname + ' </h2>'
+    greeting += '<br>'
+    greeting += '<p>You\'re logged in</p>'
+    greeting += '<br>'
+    greeting += '<a href="/account/update/' + res.locals.accountData.account_id + '" title="Click to update your account information">Update Account Information</a>'
+    greeting += '<br>'
+    greeting += '<a href="/account/admin/"title="Click to view all accounts">View Admin Panel</a>'
+    greeting += '<br>'
+    greeting += '<h3>Inventory Management</h3>'
+    greeting += '<br>'
+    greeting += '<p>To manage inventory classifications and vehicles, <a href="/inv/">Click here</a></p>'
+  }
+  else if(res.locals.accountData.account_type == 'Employee') {
     greeting = '<h2>Welcome ' + res.locals.accountData.account_firstname + ' </h2>'
     greeting += '<br>'
     greeting += '<p>You\'re logged in</p>'

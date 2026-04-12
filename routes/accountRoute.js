@@ -42,5 +42,10 @@ router.post("/update/password",
   regValidate.checkAccountUpdateData,
   utilities.handleErrors(accountController.updatePassword));
 
+router.get("/admin", utilities.checkPrivileges, utilities.handleErrors(accountController.buildAdmin))
+
+router.get("/admin/delete/:accountId", utilities.checkPrivileges, utilities.handleErrors(accountController.deleteAccountView))
+
+router.post("/admin/delete/", utilities.checkPrivileges, utilities.handleErrors(accountController.deleteAccount))
 
 module.exports = router;

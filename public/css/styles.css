@@ -209,7 +209,7 @@ h1 {
     opacity: 1;
   }
 
-  .login-panel, .register-panel, .new-classification-panel, .new-vehicle-panel, .delete-vehicle-panel {
+  .login-panel, .register-panel, .new-classification-panel, .new-vehicle-panel, .delete-vehicle-panel, .delete-account-panel {
     display: flex;
     justify-content: center;
     align-items: center;
